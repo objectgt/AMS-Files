@@ -80,8 +80,14 @@ namespace ARS
 
                     if (NeedToReport(plr))
                     {
-                        GorillaPlayerScoreboardLine.ReportPlayer(plr.UserId,
-                            GorillaPlayerLineButton.ButtonType.Toxicity, plr.NickName);
+                        foreach (GorillaPlayerScoreboardLine scoreboardLine in
+                                 GorillaScoreboardTotalUpdater.allScoreboardLines.Where(scoreboardLine =>
+                                     scoreboardLine.linePlayer ==
+                                     NetworkSystem.Instance.GetNetPlayerByID(plr.ActorNumber)))
+                        {
+                            scoreboardLine.reportedToxicity = true;
+                            scoreboardLine.PressButton(true, GorillaPlayerLineButton.ButtonType.Toxicity);
+                        }
                         EasierLog($"Reported user {plr.NickName}.");
                     }
 
@@ -99,8 +105,14 @@ namespace ARS
         {
             if (!PlayersChecked.Contains(plrToCheck) && NeedToReport(plrToCheck))
             {
-                GorillaPlayerScoreboardLine.ReportPlayer(plrToCheck.UserId,
-                    GorillaPlayerLineButton.ButtonType.Toxicity, plrToCheck.NickName);
+                foreach (GorillaPlayerScoreboardLine scoreboardLine in
+                         GorillaScoreboardTotalUpdater.allScoreboardLines.Where(scoreboardLine =>
+                             scoreboardLine.linePlayer ==
+                             NetworkSystem.Instance.GetNetPlayerByID(plrToCheck.ActorNumber)))
+                {
+                    scoreboardLine.reportedToxicity = true;
+                    scoreboardLine.PressButton(true, GorillaPlayerLineButton.ButtonType.Toxicity);
+                }
 
                 EasierLog($"Reported user {plrToCheck.NickName}.");
                 PlayersChecked.Add(plrToCheck);
