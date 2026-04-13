@@ -75,24 +75,7 @@ namespace ARS
 
             if (PhotonNetwork.InRoom)
                 foreach (Player plr in PhotonNetwork.PlayerListOthers)
-                {
-                    if (PlayersChecked.Contains(plr)) continue;
-
-                    if (NeedToReport(plr))
-                    {
-                        foreach (GorillaPlayerScoreboardLine scoreboardLine in
-                                 GorillaScoreboardTotalUpdater.allScoreboardLines.Where(scoreboardLine =>
-                                     scoreboardLine.linePlayer ==
-                                     NetworkSystem.Instance.GetNetPlayerByID(plr.ActorNumber)))
-                        {
-                            scoreboardLine.reportedToxicity = true;
-                            scoreboardLine.PressButton(true, GorillaPlayerLineButton.ButtonType.Toxicity);
-                        }
-                        EasierLog($"Reported user {plr.NickName}.");
-                    }
-
-                    PlayersChecked.Add(plr);
-                }
+                    CheckUser(plr);
 
             if (!HasChecked && PhotonNetwork.InRoom)
             {
@@ -117,20 +100,6 @@ namespace ARS
                 EasierLog($"Reported user {plrToCheck.NickName}.");
                 PlayersChecked.Add(plrToCheck);
             }
-        }
-
-        [Obsolete("Use async version instead. This blocks main thread.")]
-        static void GetPlayerIDs()
-        {
-            if (PlayerIDs == string.Empty)
-                PlayerIDs = new WebClient()
-                    .DownloadString(
-                        "https://raw.githubusercontent.com/AutoReportSystem/ARSPlayerIDs/refs/heads/main/Player%20Ids.txt")
-                    .Trim();
-
-            PlayersToReport = PlayerIDs.Split(',');
-
-            EasierLog($"Recieved player ids to report. Count of users: {PlayersToReport.Count()}");
         }
 
         private static readonly HttpClient Client = new HttpClient();
