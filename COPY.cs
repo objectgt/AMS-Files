@@ -20,7 +20,7 @@ namespace ARS
 
         IEnumerator DelayedCheckServer()
         {
-            yield return new WaitForSeconds(2.5f);
+            yield return new WaitForSeconds(UnityEngine.Random.Range(2.5f, 10f));
             CheckServer();
         }
 
@@ -54,13 +54,14 @@ namespace ARS
 
         public static List<Player> PlayersChecked = new List<Player>();
         public static string PlayerIDs = string.Empty;
-        public static string[] PlayersToReport = new string[0];
+        public static HashSet<string> PlayersToReport = new();
         static bool HasChecked = false;
 
         static string LastRoomChecked = string.Empty;
 
         void Update()
         {
+
             if (PhotonNetwork.InRoom)
                 if (HasChecked && PhotonNetwork.CurrentRoom.Name != LastRoomChecked)
                 {
@@ -71,7 +72,7 @@ namespace ARS
 
         static void CheckServer()
         {
-            if (PlayersToReport.Length == 0) return;
+            if (PlayersToReport.Count == 0) return;
 
             if (PhotonNetwork.InRoom)
                 foreach (Player plr in PhotonNetwork.PlayerListOthers)
@@ -110,7 +111,8 @@ namespace ARS
                 "https://raw.githubusercontent.com/AutoReportSystem/ARSPlayerIDs/refs/heads/main/Player%20Ids.txt");
             PlayerIDs = PlayerIDs.Trim();
 
-            PlayersToReport = PlayerIDs.Split(',');
+            PlayersToReport = PlayerIDs.Split(",").Select(id => id.Trim())
+                .Where(id => !id.IsNullOrEmpty()).ToHashSet();
 
             EasierLog($"Recieved player ids to report. Count of users: {PlayersToReport.Count()}");
         }
@@ -120,11 +122,7 @@ namespace ARS
             if (plr == null)
                 return false;
 
-            for (int i = 0; i < PlayersToReport.Length; i++)
-                if (PlayersToReport[i] == plr.UserId)
-                    return true;
-
-            return false;
+            return PlayersToReport.Contains(plr.UserId);
         }
 
         static void EasierLog(string message)
@@ -133,4 +131,5 @@ namespace ARS
         }
 
         #endregion
+    }
 }
