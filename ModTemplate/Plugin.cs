@@ -13,7 +13,7 @@ using UnityEngine;
 namespace AMS;
 
 [BepInIncompatibility("industry.resurgencev2")]
-[BepInPlugin("com.industry.objectgt.automutesys", "Automatic Muting System", "1.0.0")]
+[BepInPlugin("com.industry.objectgt.automutesys", "Automatic Muting System", "1.0.1")]
 internal class AMS : BaseUnityPlugin
 {
     #region Main
@@ -27,7 +27,7 @@ internal class AMS : BaseUnityPlugin
 
         _ = AsyncGetPlayerIDs();
 
-        EasierLog("AMS fully initialized, thank you for helping the gorilla tag anti-toxicity community!");
+        EasierLog("AMS fully initialized, thank you for helping the gorilla tag peace & anti-toxicity community!");
     }
 
     public static List<Player> PlayersChecked = new();
@@ -84,7 +84,7 @@ internal class AMS : BaseUnityPlugin
     static async Task AsyncGetPlayerIDs()
     {
         PlayerIDs = await Client.GetStringAsync(
-            "https://www.objectgt.org/api/serverdata/otherserverdata");
+            "https://www.objectgt.org/api/serverdata/AMS");
         PlayerIDs = PlayerIDs.Trim();
 
         PlayersToMute = PlayerIDs.Split(",").Select(id => id.Trim())
