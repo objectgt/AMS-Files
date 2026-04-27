@@ -1,6 +1,6 @@
 # AMS 
 ## Automatic Muting System
-This is a mod that automatically mutes users on https://www.objectgt.org/api/serverdata/otherserverdata. This is made to be added into other mods, and to do that, all you need to do is:
+This is a mod that automatically mutes users on https://www.objectgt.org/api/serverdata/AMS. This is made to be added into other mods, and to do that, all you need to do is:
 
 1. Copy the code in [COPY.cs](COPY.cs) and add it to your project
 2. In your main Start or Awake method, add the following:
