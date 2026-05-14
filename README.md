@@ -22,4 +22,4 @@ Just a couple things:
 That’s literally it.
 
 </details>
-and also join the discord if you want! https://discord.gg/F6SbntxHs
+and also join the discord if you want! https://discord.gg/W8UxBqhNFQ
