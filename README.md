@@ -1,6 +1,6 @@
 # AMS 
 ## Automatic Muting System
-This is a mod that automatically mutes users on the https://www.objectgt.org/api/serverdata/AMS website.
+This is a mod that automatically mutes users on the https://raw.githubusercontent.com/objectgt/ams-ids/refs/heads/main/ids.txt github repo.
 <details>
   <summary><b>❓ Cool, but what do I need to do if I add it to my own mod?</b></summary>
 
