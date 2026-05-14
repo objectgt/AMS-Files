@@ -1,9 +1,9 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36017.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ARS", "ModTemplate\ARS.csproj", "{DF097EC3-8156-43B0-90B1-14C27FA5F51D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMS", "ModTemplate\AMS.csproj", "{DF097EC3-8156-43B0-90B1-14C27FA5F51D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
